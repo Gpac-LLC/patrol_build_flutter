@@ -5,7 +5,7 @@ app:
   envs:
   - BITRISE_STEP_ID: flutter-build-patrol
   - BITRISE_STEP_VERSION: "0.0.1"
-  - BITRISE_STEP_GIT_CLONE_URL: https://github.com/gpac-Tech-Hub/patrol_build_flutter.git
+  - BITRISE_STEP_GIT_CLONE_URL: https://github.com/Gpac-LLC/patrol_build_flutter.git
   - MY_STEPLIB_REPO_FORK_GIT_URL: $MY_STEPLIB_REPO_FORK_GIT_URL
   - FLUTTER_BUILD_PATROL_PLATFORM: both
   - FLUTTER_BUILD_PATROL_VERSION: null

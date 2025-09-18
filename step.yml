@@ -1,4 +1,3 @@
-
 title: Flutter Build Patrol
 summary: Install and Build Patrol for Flutter Projects
 description: |-
@@ -6,9 +5,9 @@ description: |-
   - Installing the Patrol CLI if it is not already installed.
   - Validates the installed Patrol CLI version and your project's Patrol version.
   - Builds the Patrol APK, iOS or BOTH if specified.
-website: https://github.com/gpac-Tech-Hub/patrol_build_flutter
-source_code_url: https://github.com/gpac-Tech-Hub/patrol_build_flutter
-support_url: https://github.com/gpac-Tech-Hub/patrol_build_flutter/issues
+website: https://github.com/Gpac-LLC/patrol_build_flutter
+source_code_url: https://github.com/Gpac-LLC/patrol_build_flutter
+support_url: https://github.com/Gpac-LLC/patrol_build_flutter/issues
 
 project_type_tags:
 - flutter
@@ -22,7 +21,7 @@ type_tags:
 
 toolkit:
   go:
-    package_name: github.com/gpac-Tech-Hub/patrol_build_flutter
+    package_name: github.com/Gpac-LLC/patrol_build_flutter
 
 inputs:
 - patrol_version: $FLUTTER_BUILD_PATROL_VERSION
