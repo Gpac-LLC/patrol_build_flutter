@@ -1,8 +1,6 @@
 package validate_versions
 
 import (
-	"fmt"
-
 	v "github.com/Masterminds/semver/v3"
 )
 
@@ -12,19 +10,29 @@ type ValidateRunParams struct {
 	PatrolVersion  *v.Version
 }
 
-func CheckCompatibility(params ValidateRunParams) error {
+func CheckCompatibility(params ValidateRunParams) bool {
 	flutterV := params.FlutterVersion
 	patrolCLIV := params.CliVersion
 	patrolV := params.PatrolVersion
 
+	if flutterV == nil {
+		panic("FlutterVersion cannot be nil in CheckCompatibility")
+	}
+	if patrolCLIV == nil {
+		panic("panic: CliVersion cannot be nil in CheckCompatibility")
+	}
+	if patrolV == nil {
+		panic("PatrolVersion cannot be nil in CheckCompatibility")
+	}
+
 	for _, entry := range CompatibilityTable {
 		if isVersionInRange(patrolCLIV, entry.PatrolCLIRange) &&
 			isVersionInRange(patrolV, entry.PatrolRange) &&
-			flutterV.GreaterThan(entry.MinFlutterVersion) || flutterV.Equal(entry.MinFlutterVersion) {
-			return nil
+			flutterV.Equal(entry.FlutterVersion) {
+			return true
 		}
 	}
-	return fmt.Errorf("❌ Flutter %s, Patrol CLI %s and Patrol %s are not compatible", flutterV.String(), patrolCLIV.String(), patrolV.String())
+	return false
 }
 
 func isVersionInRange(v *v.Version, r VersionRange) bool {
