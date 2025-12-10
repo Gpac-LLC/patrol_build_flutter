@@ -4,14 +4,16 @@ import (
 	v "github.com/Masterminds/semver/v3"
 )
 
-// / This class contains the compatibility table for Patrol CLI and Patrol
-// / The compatibility table is used to check if the Patrol CLI version is compatible
+/*
+This struct contains the compatibility table for Patrol CLI and Patrol
+The compatibility table is used to check if the Patrol CLI version is compatible
+*/
 type VersionRange struct {
 	Min *v.Version
 	Max *v.Version
 }
 
-// / This class contains the compatibility table for Patrol and Flutter
+// CompatibilityEntry links Patrol CLI, Patrol, and Flutter version requirements.
 type CompatibilityEntry struct {
 	PatrolCLIRange    VersionRange
 	PatrolRange       VersionRange
@@ -20,8 +22,28 @@ type CompatibilityEntry struct {
 
 var CompatibilityTable = []CompatibilityEntry{
 	{
-		PatrolCLIRange:    VersionRange{Min: v.MustParse("3.5.0"), Max: v.MustParse("3.5.1")},
-		PatrolRange:       VersionRange{Min: v.MustParse("3.14.0"), Max: v.MustParse("3.15.1")},
+		PatrolCLIRange:    VersionRange{Min: v.MustParse("4.0.0"), Max: v.MustParse("4.0.0")},
+		PatrolRange:       VersionRange{Min: v.MustParse("4.0.0"), Max: v.MustParse("4.0.0")},
+		MinFlutterVersion: v.MustParse("3.32.0"),
+	},
+	{
+		PatrolCLIRange:    VersionRange{Min: v.MustParse("3.11.0"), Max: v.MustParse("3.11.0")},
+		PatrolRange:       VersionRange{Min: v.MustParse("3.20.0"), Max: v.MustParse("3.20.0")},
+		MinFlutterVersion: v.MustParse("3.32.0"),
+	},
+	{
+		PatrolCLIRange:    VersionRange{Min: v.MustParse("3.9.0"), Max: v.MustParse("3.10.0")},
+		PatrolRange:       VersionRange{Min: v.MustParse("3.18.0"), Max: v.MustParse("3.19.0")},
+		MinFlutterVersion: v.MustParse("3.32.0"),
+	},
+	{
+		PatrolCLIRange:    VersionRange{Min: v.MustParse("3.7.0"), Max: v.MustParse("3.8.0")},
+		PatrolRange:       VersionRange{Min: v.MustParse("3.16.0"), Max: v.MustParse("3.17.0")},
+		MinFlutterVersion: v.MustParse("3.32.0"),
+	},
+	{
+		PatrolCLIRange:    VersionRange{Min: v.MustParse("3.5.0"), Max: v.MustParse("3.6.0")},
+		PatrolRange:       VersionRange{Min: v.MustParse("3.14.0"), Max: v.MustParse("3.15.2")},
 		MinFlutterVersion: v.MustParse("3.24.0"),
 	},
 	{

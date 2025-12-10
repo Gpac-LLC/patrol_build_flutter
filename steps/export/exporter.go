@@ -9,7 +9,7 @@ type Exporter interface {
 }
 
 func Run(exporter Exporter) error {
-	print.StepIniciated("--- Getting Patrol builds ---")
+	print.StepInitiated("--- Getting Patrol builds ---")
 
 	if err := exporter.FindAndExportBuilds(); err != nil {
 		return err

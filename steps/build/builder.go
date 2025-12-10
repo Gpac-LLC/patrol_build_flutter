@@ -14,10 +14,10 @@ type Builder interface {
 }
 
 func Run(installer Builder) error {
-	print.StepIniciated("--- Starting Build Process ---")
+	print.StepInitiated("--- Starting Build Process ---")
 
 	commands, err := installer.BuildParametersFromEnv()
-	
+
 	if err != nil {
 		print.Error(fmt.Sprintf("❌ Failed to retrieve build commands: %s", err))
 		return err

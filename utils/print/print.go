@@ -51,7 +51,7 @@ func StepCompleted(message string) {
 	_printColor(Purple, message)
 }
 
-func StepIniciated(message string) {
+func StepInitiated(message string) {
 	_printColor(Cyan, message)
 }
 

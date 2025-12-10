@@ -6,13 +6,13 @@ import (
 	v "github.com/Masterminds/semver/v3"
 )
 
-type ValidareRunParams struct {
+type ValidateRunParams struct {
 	FlutterVersion *v.Version
 	CliVersion     *v.Version
 	PatrolVersion  *v.Version
 }
 
-func CheckCompatibility(params ValidareRunParams) error {
+func CheckCompatibility(params ValidateRunParams) error {
 	flutterV := params.FlutterVersion
 	patrolCLIV := params.CliVersion
 	patrolV := params.PatrolVersion

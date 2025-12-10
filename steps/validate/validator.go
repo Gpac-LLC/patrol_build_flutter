@@ -22,7 +22,7 @@ type ValidatorRunParams struct {
 func Run(params ValidatorRunParams) error {
 	runner := params.Runner
 
-	print.StepIniciated("--- Getting Flutter Version ---")
+	print.StepInitiated("--- Getting Flutter Version ---")
 
 	flutterVersion, err := runner.GetVersion()
 	if err != nil {
@@ -32,7 +32,7 @@ func Run(params ValidatorRunParams) error {
 
 	print.StepCompleted("✅ Flutter Version: " + flutterVersion.String() + "\n")
 
-	print.StepIniciated("--- Getting Patrol Version ---")
+	print.StepInitiated("--- Getting Patrol Version ---")
 	patrolVersion, patrolErr := runner.GetPatrolVersion()
 
 	if patrolErr != nil {
@@ -42,13 +42,13 @@ func Run(params ValidatorRunParams) error {
 
 	print.StepCompleted("✅ Patrol Version: " + patrolVersion.String() + "\n")
 
-	validatorParams := versions.ValidareRunParams{
+	validatorParams := versions.ValidateRunParams{
 		FlutterVersion: flutterVersion,
 		CliVersion:     params.CliVersion,
 		PatrolVersion:  patrolVersion,
 	}
 
-	print.StepIniciated("--- Checking Compatibility ---")
+	print.StepInitiated("--- Checking Compatibility ---")
 	validationError := versions.CheckCompatibility(validatorParams)
 	if validationError != nil {
 		print.Warning("❌ Failed to check compatibility")
