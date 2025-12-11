@@ -3,25 +3,23 @@ default_step_lib_source: https://github.com/bitrise-io/bitrise-steplib.git
 
 app:
   envs:
-  - BITRISE_STEP_ID: flutter-build-patrol
-  - BITRISE_STEP_VERSION: "0.0.1"
-  - BITRISE_STEP_GIT_CLONE_URL: https://github.com/Gpac-LLC/patrol_build_flutter.git
-  - MY_STEPLIB_REPO_FORK_GIT_URL: $MY_STEPLIB_REPO_FORK_GIT_URL
-  - FLUTTER_BUILD_PATROL_PLATFORM: both
-  - FLUTTER_BUILD_PATROL_VERSION: null
-  - FLUTTER_BUILD_PATROL_TARGET: null
-  - FLUTTER_BUILD_PATROL_BUILD_TYPE: release
-  - FLUTTER_BUILD_PATROL_TAGS: null
-  - FLUTTER_BUILD_PATROL_EXCLUDED_TAGS: null
-  - FLUTTER_BUILD_PATROL_IS_VERBOSE: true
-  - FLUTTER_BUILD_PATROL_IS_COVERED: false
-  - TARGET_DIRECTORY_PATH: null
+    - BITRISE_STEP_ID: flutter-build-patrol
+    - BITRISE_STEP_VERSION: "0.0.4"
+    - BITRISE_STEP_GIT_CLONE_URL: https://github.com/Gpac-LLC/patrol_build_flutter.git
+    - MY_STEPLIB_REPO_FORK_GIT_URL: $MY_STEPLIB_REPO_FORK_GIT_URL
+    - CUSTOM_PATROL_CLI_VERSION : ""
+    # Your _test.dart file path
+    - TEST_TARGET_DIRECTORY: "patrol_test/my_test.dart"
+    - PLATFORM: both
+    - TEST_BUILD_TYPE: release
+    - TAGS: ""
+    - EXCLUDED_TAGS: ""
+    - IS_VERBOSE_MODE: true
 
-  # Exports
-  - PATROL_APK_PATH: build/app/outputs/apk/debug/app-debug.apk
-  - TEST_APK_PATH: build/app/outputs/apk/androidTest/debug/app-debug-androidTest.apk
-  - IOS_TESTS_PATH: build/ios_integ/Build/Products/ios_tests.zip
-  - TEST_COVERAGE_ICOV_PATH: coverage/Icov.info
+    # Exports
+    - PATROL_APK_PATH: build/app/outputs/apk/debug/app-debug.apk
+    - TEST_APK_PATH: build/app/outputs/apk/androidTest/debug/app-debug-androidTest.apk
+    - IOS_TESTS_PATH: build/ios_integ/Build/Products/ios_tests.zip
 
 workflows:
   test:

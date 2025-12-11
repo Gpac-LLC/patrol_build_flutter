@@ -13,7 +13,7 @@ var patrolInstall = commands.PatrolInstall
 
 func Install() (string, error) {
 
-	customVersion := os.Getenv(constants.Version)
+	customVersion := os.Getenv(constants.CustomPatrolCLIVersion)
 
 	if customVersion == "" {
 		print.Warning("Version was not provided. Using the latest version.")

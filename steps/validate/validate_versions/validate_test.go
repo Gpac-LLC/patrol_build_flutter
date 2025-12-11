@@ -176,12 +176,12 @@ func TestTableCheckCompatibility(t *testing.T) {
 			context:          "✅ Matches table entry: CLI [1.1.4-1.1.11], Patrol [1.0.9-1.1.11], Flutter 3.3.0",
 		},
 		{
-			name:             "nonCompatible_flutter_above_required_version", // ❌ Flutter version too high, not in table
+			name:             "compatible_flutter_above_min_version", // ✅ Flutter version above minimum it's accepted
 			flutterVersion:   "3.38.1",
 			patrolCLIVersion: "4.0.1",
 			patrolVersion:    "4.0.0",
-			areCompatible:    false,
-			context:          "❌ Flutter version 3.38.1 not in table (only 3.32.0 allowed for this entry)",
+			areCompatible:    true,
+			context:          "Flutter version 3.38.1 is not in table (only 3.32.0 specified) but exceeds minimum requirement",
 		},
 		{
 			name:             "nonCompatible_flutter_version_lower", // ❌ Flutter version 3.22.0 only allowed for CLI 3.2.0, Patrol 3.11.0-3.11.1

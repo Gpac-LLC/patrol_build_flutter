@@ -10,13 +10,11 @@ import (
 func BuildParametersFromEnv() (*bp.BuildParameters, error) {
 	envMap := map[string]string{
 		"platform":     os.Getenv(constants.Platform),
-		"target":       os.Getenv(constants.Target),
+		"target":       os.Getenv(constants.TestTargetDirectory),
 		"buildType":    os.Getenv(constants.BuildType),
 		"tags":         os.Getenv(constants.Tags),
 		"excludedTags": os.Getenv(constants.ExcludedTags),
-		"verbose":      os.Getenv(constants.IsVerbose),
-		"isCovered":    os.Getenv(constants.IsCovered),
-		"filePath":     os.Getenv(constants.FilePath),
+		"verbose":      os.Getenv(constants.IsVerboseMode),
 	}
 
 	// Final build

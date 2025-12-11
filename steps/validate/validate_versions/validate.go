@@ -28,7 +28,7 @@ func CheckCompatibility(params ValidateRunParams) bool {
 	for _, entry := range CompatibilityTable {
 		if isVersionInRange(patrolCLIV, entry.PatrolCLIRange) &&
 			isVersionInRange(patrolV, entry.PatrolRange) &&
-			flutterV.Equal(entry.FlutterVersion) {
+			flutterV.GreaterThanEqual(entry.FlutterVersion) {
 			return true
 		}
 	}

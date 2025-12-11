@@ -1,13 +1,11 @@
 package build_constants
 
 const (
-	Version      = "FLUTTER_BUILD_PATROL_VERSION"
-	Platform     = "FLUTTER_BUILD_PATROL_PLATFORM"
-	Target       = "FLUTTER_BUILD_PATROL_TARGET" // comma-separated
-	BuildType    = "FLUTTER_BUILD_PATROL_BUILD_TYPE"
-	Tags         = "FLUTTER_BUILD_PATROL_TAGS"          // optional, comma-separated
-	ExcludedTags = "FLUTTER_BUILD_PATROL_EXCLUDED_TAGS" // optional, comma-separated
-	IsVerbose    = "FLUTTER_BUILD_PATROL_IS_VERBOSE"
-	IsCovered    = "FLUTTER_BUILD_PATROL_IS_COVERED"
-	FilePath     = "TARGET_DIRECTORY_PATH"
+	CustomPatrolCLIVersion = "CUSTOM_PATROL_CLI_VERSION" // Optional, using latest when empty
+	TestTargetDirectory    = "TEST_TARGET_DIRECTORY"     // Required
+	Platform               = "PLATFORM"                  // Required, using both as default
+	BuildType              = "TEST_BUILD_TYPE"           // Required, using release as default
+	Tags                   = "TAGS"                      // optional, using empty string as default
+	ExcludedTags           = "EXCLUDED_TAGS"             // optional, using empty string as default
+	IsVerboseMode          = "IS_VERBOSE_MODE"           // optional, using false as default
 )

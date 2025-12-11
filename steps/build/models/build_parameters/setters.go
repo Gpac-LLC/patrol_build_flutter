@@ -40,14 +40,6 @@ func SetBuildType(bp *BuildParameters, value string) error {
 	}
 }
 
-func SetFilePath(bp *BuildParameters, value string) error {
-	if strings.TrimSpace(value) == "" {
-		return errors.New("filePath cannot be empty")
-	}
-	bp.FilePath = value
-	return nil
-}
-
 func SetTags(bp *BuildParameters, value string) error {
 	bp.Tags = formatTags(value)
 	return nil
@@ -60,10 +52,6 @@ func SetExcludedTags(bp *BuildParameters, value string) error {
 
 func SetVerbose(bp *BuildParameters, value string) error {
 	return setFlag(value, "--verbose", &bp.IsVerbose, "verbose")
-}
-
-func SetCoverage(bp *BuildParameters, value string) error {
-	return setFlag(value, "--covered", &bp.IsCoverage, "isCoverage")
 }
 
 // formatTags converts comma-separated values to '( tag1 && tag2 )' format.

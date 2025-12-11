@@ -13,8 +13,6 @@ type BuildParameters struct {
 	Tags         string
 	ExcludedTags string
 	IsVerbose    string
-	IsCoverage   string
-	FilePath     string
 }
 
 // NewBuildParameters builds a BuildParameters struct from a map of environment variables.
@@ -25,14 +23,12 @@ func NewBuildParameters(envMap map[string]string) (*BuildParameters, error) {
 		"platform":  SetPlatform,
 		"target":    SetTarget,
 		"buildType": SetBuildType,
-		"filePath":  SetFilePath,
 	}
 
 	optionalFields := map[string]func(*BuildParameters, string) error{
 		"tags":         SetTags,
 		"excludedTags": SetExcludedTags,
 		"verbose":      SetVerbose,
-		"isCoverage":   SetCoverage,
 	}
 
 	// Apply required setters
@@ -62,8 +58,8 @@ func NewBuildParameters(envMap map[string]string) (*BuildParameters, error) {
 func (bp *BuildParameters) Command() []string {
 	var args []string
 
-	if bp.FilePath != "" {
-		args = append(args, "--target ", bp.FilePath)
+	if bp.Target != "" {
+		args = append(args, "--target", bp.Target)
 	}
 
 	args = append(args, "--"+bp.BuildType)
@@ -77,9 +73,6 @@ func (bp *BuildParameters) Command() []string {
 	if bp.IsVerbose != "" {
 		args = append(args, bp.IsVerbose)
 	}
-	if bp.IsCoverage != "" {
-		args = append(args, bp.IsCoverage)
-	}
 
 	if bp.Platform == "both" {
 		return []string{
@@ -88,7 +81,7 @@ func (bp *BuildParameters) Command() []string {
 		}
 	}
 
-	var command = "patrol build " + bp.Target + " " + strings.Join(args, " ")
+	var command = "patrol build " + bp.Platform + " " + strings.Join(args, " ")
 
 	return []string{
 		command,
