@@ -4,8 +4,8 @@
 # and creates a GitHub Release with downloadable artifacts.
 #
 # Trigger:
-#   - Runs on every push to a tag matching 'v*' (e.g., v1.0.0).
-
+#   - Runs on every push to any tag.
+#
 # Usage:
 #   - Download the built binaries from the GitHub Release or workflow artifacts for use in your CI/CD.
 
@@ -14,7 +14,7 @@ name: Build Binaries
 on:
   push:
     tags:
-      - 'v*' # Triggers on tags like v1.0.0
+      - '*' # Listens to all tag pushes
 
 permissions:
   contents: write # Required to upload binaries to GitHub Releases
