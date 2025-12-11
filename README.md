@@ -1,5 +1,8 @@
 # Flutter Build Patrol
 
+[![Test](https://github.com/Gpac-LLC/patrol_build_flutter/actions/workflows/test.yml/badge.svg?branch=main)](https://github.com/Gpac-LLC/patrol_build_flutter/actions/workflows/test.yml)
+[![Version](https://img.shields.io/github/v/tag/Gpac-LLC/patrol_build_flutter?label=version)](https://github.com/Gpac-LLC/patrol_build_flutter/tags)
+
 This project is a Go-based utility for managing the installation and versioning of the Patrol CLI. It automates the process of checking if the Patrol CLI is installed, installing it if necessary, and verifying its version.
 
 
