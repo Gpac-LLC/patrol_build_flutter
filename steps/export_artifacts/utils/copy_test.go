@@ -6,7 +6,34 @@ import (
 	"testing"
 )
 
+type stubEnvExporter struct {
+	t        *testing.T
+	exported map[string]string
+}
+
+func (s *stubEnvExporter) Export(key, value string) error {
+	if s.exported == nil {
+		s.exported = make(map[string]string)
+	}
+	s.exported[key] = value
+	s.t.Setenv(key, value)
+	return nil
+}
+
+func setupEnvExporterStub(t *testing.T) *stubEnvExporter {
+	stub := &stubEnvExporter{
+		t:        t,
+		exported: make(map[string]string),
+	}
+	SetEnvExporter(stub)
+	t.Cleanup(func() {
+		SetEnvExporter(nil)
+	})
+	return stub
+}
+
 func TestCopyFilesToFolder(t *testing.T) {
+	stub := setupEnvExporterStub(t)
 	srcDir := t.TempDir()
 	dstDir := t.TempDir()
 	file1 := filepath.Join(srcDir, "a.txt")
@@ -24,13 +51,17 @@ func TestCopyFilesToFolder(t *testing.T) {
 	}
 	for i, f := range files {
 		base := filepath.Base(f)
-		if _, err := os.Stat(filepath.Join(dstDir, base)); err != nil {
+		dstPath := filepath.Join(dstDir, base)
+		if _, err := os.Stat(dstPath); err != nil {
 			t.Errorf("file %s not copied", base)
 		}
 		// Check env variable is set
 		val := os.Getenv(envKeys[i])
-		if val == "" {
-			t.Errorf("env %s not set", envKeys[i])
+		if val != dstPath {
+			t.Errorf("env %s expected %s, got %s", envKeys[i], dstPath, val)
+		}
+		if exported, ok := stub.exported[envKeys[i]]; !ok || exported != dstPath {
+			t.Errorf("exporter expected %s=%s, got %s", envKeys[i], dstPath, exported)
 		}
 	}
 }

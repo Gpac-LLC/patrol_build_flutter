@@ -5,7 +5,35 @@ import (
 	"path/filepath"
 	"strings"
 	"testing"
+
+	export_artifacts_utils "patrol_install/steps/export_artifacts/utils"
 )
+
+type stubEnvExporter struct {
+	t        *testing.T
+	exported map[string]string
+}
+
+func (s *stubEnvExporter) Export(key, value string) error {
+	if s.exported == nil {
+		s.exported = make(map[string]string)
+	}
+	s.exported[key] = value
+	s.t.Setenv(key, value)
+	return nil
+}
+
+func setupEnvExporterStub(t *testing.T) *stubEnvExporter {
+	stub := &stubEnvExporter{
+		t:        t,
+		exported: make(map[string]string),
+	}
+	export_artifacts_utils.SetEnvExporter(stub)
+	t.Cleanup(func() {
+		export_artifacts_utils.SetEnvExporter(nil)
+	})
+	return stub
+}
 
 func TestIsAndroidPlatform(t *testing.T) {
 	if IsAndroidPlatform("ios") {
@@ -83,6 +111,7 @@ func TestFindFirstApkInDir_MultipleApks(t *testing.T) {
 }
 
 func TestCopyAndroidArtifacts_NoAndroid(t *testing.T) {
+	setupEnvExporterStub(t)
 	t.Setenv("PLATFORM", "ios")
 	err := CopyAndroidArtifacts(t.TempDir(), t.TempDir(), t.TempDir())
 	if err != nil {
@@ -91,6 +120,7 @@ func TestCopyAndroidArtifacts_NoAndroid(t *testing.T) {
 }
 
 func TestCopyAndroidArtifacts_NoApks(t *testing.T) {
+	setupEnvExporterStub(t)
 	t.Setenv("PLATFORM", "android")
 	t.Setenv("BUILD_TYPE", "debug")
 	artifactsPath := t.TempDir()
@@ -103,6 +133,7 @@ func TestCopyAndroidArtifacts_NoApks(t *testing.T) {
 }
 
 func TestCopyAndroidArtifacts_Success(t *testing.T) {
+	setupEnvExporterStub(t)
 	t.Setenv("PLATFORM", "android")
 	t.Setenv("BUILD_TYPE", "debug")
 	testDir := t.TempDir()

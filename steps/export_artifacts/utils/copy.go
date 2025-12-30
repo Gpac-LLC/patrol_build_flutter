@@ -6,8 +6,6 @@ import (
 	"os"
 	"path/filepath"
 	print "patrol_install/utils/print"
-
-	"github.com/bitrise-io/go-steputils/tools"
 )
 
 // closeWithLog closes a file and logs an error if closing fails.
@@ -49,7 +47,7 @@ func CopyFilesToFolder(srcFiles []string, destFolder string, envKeys []string) e
 		closeWithLog(src, srcFile)
 		closeWithLog(dstFile, dst)
 
-		if err := tools.ExportEnvironmentWithEnvman(envKeys[i], dst); err != nil {
+		if err := exportEnv(envKeys[i], dst); err != nil {
 			print.Error(fmt.Sprintf("Error exporting env by Envman %s: %v", envKeys[i], err))
 			return err
 		}
