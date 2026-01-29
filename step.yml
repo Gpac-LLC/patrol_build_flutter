@@ -42,7 +42,7 @@ inputs:
       The directory that will be built by the step.
       If you leave this input empty, the step will use the entrypoint test_bundle.dart 
       from integration_test or patrol_test folder, depending on your Patrol Version.
-    is_required: true
+    is_required: false
 - platform: both
   opts:
     title: Platform
