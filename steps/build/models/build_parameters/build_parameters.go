@@ -3,8 +3,9 @@ package build_parameters
 import (
 	"fmt"
 	"os"
-	build_constants "patrol_install/steps/build/constants"
 	"strings"
+
+	build_constants "patrol_install/steps/build/constants"
 )
 
 // BuildParameters holds validated and formatted build configuration.
@@ -23,12 +24,12 @@ func NewBuildParameters(envMap map[string]string) (*BuildParameters, error) {
 
 	requiredFields := map[string]func(*BuildParameters, string) error{
 		"platform":  SetPlatform,
-		"target":    SetTarget,
 		"buildType": SetBuildType,
 	}
 
 	optionalFields := map[string]func(*BuildParameters, string) error{
 		"tags":         SetTags,
+		"target":       SetTarget,
 		"excludedTags": SetExcludedTags,
 		"verbose":      SetVerbose,
 	}
