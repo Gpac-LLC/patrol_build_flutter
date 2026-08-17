@@ -1,6 +1,9 @@
 package main
 
 import (
+	"fmt"
+	"os"
+
 	build "patrol_install/steps/build"
 	"patrol_install/steps/export_artifacts"
 	"patrol_install/steps/install_patrol_cli"
@@ -8,43 +11,27 @@ import (
 	"patrol_install/utils/print"
 )
 
-func main() {
-	cliVersion, installError := install_patrol_cli.Run(&install_patrol_cli.InstallerRunner{})
-	if installError != nil {
-		print.Error("❌ Setup failed")
-		print.Error(installError.Error())
-		print.Error("Please check the logs for more details.")
-	} else {
-		print.Success("✅ Installing CLI Completed Successfully")
+func exitOnError(step string, err error) {
+	if err != nil {
+		print.Error(fmt.Sprintf("❌ %s failed: %s", step, err))
+		os.Exit(1)
 	}
+}
 
-	validatorParams := validate.ValidatorRunParams{
+func main() {
+	cliVersion, err := install_patrol_cli.Run(&install_patrol_cli.InstallerRunner{})
+	exitOnError("Install Patrol CLI", err)
+	print.Success("✅ Patrol CLI installed: " + cliVersion.String())
+
+	err = validate.Run(validate.ValidatorRunParams{
 		Runner:     &validate.ValidatorRunner{},
 		CliVersion: cliVersion,
-	}
+	})
+	exitOnError("Version validation", err)
 
-	validationError := validate.Run(validatorParams)
-	if validationError != nil {
-		print.Error("❌ Validation failed")
-		print.Error(validationError.Error())
-		print.Error("Please check the logs for more details.")
-		return
-	}
+	err = build.Run(&build.BuilderRunner{})
+	exitOnError("Build", err)
 
-	buildError := build.Run(&build.BuilderRunner{})
-	if buildError != nil {
-		print.Error("❌ Build failed")
-		print.Error(buildError.Error())
-		print.Error("Please check the logs for more details.")
-		return
-	}
-
-	exportError := export_artifacts.Run(&export_artifacts.ExporterRunner{})
-	if exportError != nil {
-		print.Error("❌ Export failed")
-		print.Error(exportError.Error())
-		print.Error("Please check the logs for more details.")
-		return
-	}
-
+	err = export_artifacts.Run(&export_artifacts.ExporterRunner{})
+	exitOnError("Export artifacts", err)
 }

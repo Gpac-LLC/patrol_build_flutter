@@ -21,6 +21,10 @@ type ValidatorRunParams struct {
 }
 
 func Run(params ValidatorRunParams) error {
+	if params.CliVersion == nil {
+		return fmt.Errorf("CLI version is required for validation — was the installation step successful?")
+	}
+
 	runner := params.Runner
 
 	print.StepInitiated("--- Getting Flutter Version ---")
