@@ -12,13 +12,13 @@ type BuilderRunner struct{}
 func (p *BuilderRunner) BuildParametersFromEnv() ([]string, error) {
 	command, err := createparams.BuildParametersFromEnv()
 	if err != nil {
-		print.Error(fmt.Sprintf("Build failed: %s", err))
+		print.Errorf("Build failed: %s", err)
 		return nil, err
 	}
 
 	finalCommand := command.Command()
-	if finalCommand == nil {
-		buildErr := fmt.Errorf("no build commands generated: Command() returned nil")
+	if len(finalCommand) == 0 {
+		buildErr := fmt.Errorf("no build commands generated: Command() returned empty")
 		print.Error(buildErr.Error())
 		return nil, buildErr
 	}

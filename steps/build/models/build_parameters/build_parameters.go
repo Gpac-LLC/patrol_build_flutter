@@ -2,10 +2,7 @@ package build_parameters
 
 import (
 	"fmt"
-	"os"
 	"strings"
-
-	build_constants "patrol_install/steps/build/constants"
 )
 
 // BuildParameters holds validated and formatted build configuration.
@@ -59,10 +56,8 @@ func NewBuildParameters(envMap map[string]string) (*BuildParameters, error) {
 
 // Command constructs the final CLI command string based on the populated BuildParameters fields.
 func (bp *BuildParameters) Command() []string {
-	platform := os.Getenv(build_constants.Platform)
-	buildType := os.Getenv(build_constants.BuildType)
-	isiOS := platform != "android"
-	isDebug := buildType == "debug"
+	isiOS := bp.Platform != "android"
+	isDebug := bp.BuildType == "debug"
 	isiOSSimulator := isiOS && isDebug
 
 	args := []string{}
@@ -85,7 +80,11 @@ func (bp *BuildParameters) Command() []string {
 	}
 
 	buildCmd := func(platform, buildTypeArg string) string {
-		return "patrol build " + platform + " " + buildTypeArg + " " + strings.Join(args, " ")
+		cmd := "patrol build " + platform + " " + buildTypeArg
+		if len(args) > 0 {
+			cmd += " " + strings.Join(args, " ")
+		}
+		return cmd
 	}
 
 	if bp.Platform == "both" {

@@ -14,24 +14,34 @@ type Builder interface {
 }
 
 func Run(installer Builder) error {
+	if installer == nil {
+		return fmt.Errorf("builder is required")
+	}
+
 	print.StepInitiated("--- Starting Build Process ---")
 
 	commands, err := installer.BuildParametersFromEnv()
 
 	if err != nil {
-		print.Error(fmt.Sprintf("❌ Failed to retrieve build commands: %s", err))
+		print.Errorf("❌ Failed to retrieve build commands: %s", err)
 		return err
 	}
 
+	if len(commands) == 0 {
+		emptyErr := fmt.Errorf("no build commands generated")
+		print.Errorf("❌ %s", emptyErr)
+		return emptyErr
+	}
+
 	for _, cmd := range commands {
-		print.Action(fmt.Sprintf("Executing build command: %s", cmd))
+		print.Actionf("Executing build command: %s", cmd)
 
 		if err := executeCommand(cmd); err != nil {
-			print.Error(fmt.Sprintf("❌ Command failed: %s\n", err))
+			print.Errorf("❌ Command failed: %s\n", err)
 			return fmt.Errorf("build aborted: failed to execute '%s': %w", cmd, err)
 		}
 
-		print.Success(fmt.Sprintf("✅ Command '%s' executed successfully.\n", cmd))
+		print.Successf("✅ Command '%s' executed successfully.\n", cmd)
 	}
 
 	print.StepCompleted("✅ All build commands executed successfully.")
@@ -72,6 +82,6 @@ func executeCommand(command string) error {
 func streamOutput(pipe io.ReadCloser) {
 	scanner := bufio.NewScanner(pipe)
 	for scanner.Scan() {
-		fmt.Println(scanner.Text())
+		print.Vanilla(scanner.Text())
 	}
 }
