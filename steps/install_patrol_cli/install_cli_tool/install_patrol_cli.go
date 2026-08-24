@@ -21,7 +21,7 @@ func InstallPatrolCLI(executor CommandExecutor) (string, error) {
 	if customVersion == "" {
 		print.Warning("Version was not provided. Using the latest version.")
 	} else {
-		print.Action("Installing custom version provided: " + customVersion)
+		print.Actionf("Installing custom version provided: %s", customVersion)
 	}
 
 	installCmd := buildInstallCommand(customVersion)

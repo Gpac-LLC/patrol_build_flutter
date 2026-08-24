@@ -1,7 +1,6 @@
 package main
 
 import (
-	"fmt"
 	"os"
 
 	build "patrol_install/steps/build"
@@ -13,7 +12,7 @@ import (
 
 func exitOnError(step string, err error) {
 	if err != nil {
-		print.Error(fmt.Sprintf("❌ %s failed: %s", step, err))
+		print.Errorf("❌ %s failed: %s", step, err)
 		os.Exit(1)
 	}
 }
@@ -21,7 +20,7 @@ func exitOnError(step string, err error) {
 func main() {
 	cliVersion, err := install_patrol_cli.Run(&install_patrol_cli.InstallerRunner{})
 	exitOnError("Install Patrol CLI", err)
-	print.Success("✅ Patrol CLI installed: " + cliVersion.String())
+	print.Successf("✅ Patrol CLI installed: %s", cliVersion.String())
 
 	err = validate.Run(validate.ValidatorRunParams{
 		Runner:     &validate.ValidatorRunner{},
