@@ -95,6 +95,22 @@ func TestIsVersionInRangeFunction(t *testing.T) {
 			}
 		})
 	}
+
+	t.Run("version_in_open_ended_range", func(t *testing.T) {
+		versionRange := VersionRange{Min: v.MustParse("4.7.0")}
+
+		if !isVersionInRange(v.MustParse("99.0.0"), versionRange) {
+			t.Error("isVersionInRange() expected version above minimum to be in open-ended range")
+		}
+	})
+
+	t.Run("version_below_open_ended_range", func(t *testing.T) {
+		versionRange := VersionRange{Min: v.MustParse("4.7.0")}
+
+		if isVersionInRange(v.MustParse("4.6.9"), versionRange) {
+			t.Error("isVersionInRange() expected version below minimum to be outside open-ended range")
+		}
+	})
 }
 
 // TestTableCheckCompatibility
@@ -110,12 +126,68 @@ func TestTableCheckCompatibility(t *testing.T) {
 		context          string
 	}{
 		{
-			name:             "compatible_latest_max_versions", // ✅ Matches: CLI [4.0.0-4.0.1], Patrol [4.0.0-4.0.0], Flutter 3.32.0
+			name:             "compatible_open_ended_versions",
+			flutterVersion:   "3.32.0",
+			patrolCLIVersion: "5.0.0",
+			patrolVersion:    "5.0.0",
+			areCompatible:    true,
+			context:          "✅ Matches table entry: CLI 4.7.0+, Patrol 4.9.0+, Flutter 3.32.0",
+		},
+		{
+			name:             "compatible_cli_4_5_to_4_6_1",
+			flutterVersion:   "3.32.0",
+			patrolCLIVersion: "4.6.1",
+			patrolVersion:    "4.8.0",
+			areCompatible:    true,
+			context:          "✅ Matches table entry: CLI [4.5.0-4.6.1], Patrol [4.7.0-4.8.0], Flutter 3.32.0",
+		},
+		{
+			name:             "compatible_cli_4_4_0",
+			flutterVersion:   "3.32.0",
+			patrolCLIVersion: "4.4.0",
+			patrolVersion:    "4.6.1",
+			areCompatible:    true,
+			context:          "✅ Matches table entry: CLI 4.4.0, Patrol [4.6.0-4.6.1], Flutter 3.32.0",
+		},
+		{
+			name:             "compatible_cli_4_3_0_to_4_3_1",
+			flutterVersion:   "3.32.0",
+			patrolCLIVersion: "4.3.1",
+			patrolVersion:    "4.5.0",
+			areCompatible:    true,
+			context:          "✅ Matches table entry: CLI [4.3.0-4.3.1], Patrol 4.5.0, Flutter 3.32.0",
+		},
+		{
+			name:             "compatible_cli_4_2_0",
+			flutterVersion:   "3.32.0",
+			patrolCLIVersion: "4.2.0",
+			patrolVersion:    "4.4.0",
+			areCompatible:    true,
+			context:          "✅ Matches table entry: CLI 4.2.0, Patrol [4.2.0-4.4.0], Flutter 3.32.0",
+		},
+		{
+			name:             "compatible_cli_4_0_2_to_4_1_0",
+			flutterVersion:   "3.32.0",
+			patrolCLIVersion: "4.1.0",
+			patrolVersion:    "4.1.1",
+			areCompatible:    true,
+			context:          "✅ Matches table entry: CLI [4.0.2-4.1.0], Patrol [4.1.0-4.1.1], Flutter 3.32.0",
+		},
+		{
+			name:             "compatible_patrol_4_0_1",
+			flutterVersion:   "3.32.0",
+			patrolCLIVersion: "4.0.1",
+			patrolVersion:    "4.0.1",
+			areCompatible:    true,
+			context:          "✅ Matches corrected table entry: CLI [4.0.0-4.0.1], Patrol [4.0.0-4.0.1], Flutter 3.32.0",
+		},
+		{
+			name:             "compatible_latest_max_versions", // ✅ Matches: CLI [4.0.0-4.0.1], Patrol [4.0.0-4.0.1], Flutter 3.32.0
 			flutterVersion:   "3.32.0",
 			patrolCLIVersion: "4.0.1",
 			patrolVersion:    "4.0.0",
 			areCompatible:    true,
-			context:          "✅ Matches table entry: CLI [4.0.0-4.0.1], Patrol [4.0.0], Flutter 3.32.0",
+			context:          "✅ Matches table entry: CLI [4.0.0-4.0.1], Patrol [4.0.0-4.0.1], Flutter 3.32.0",
 		},
 		{
 			name:             "compatible_min_version_match", // ✅ Matches: CLI [3.7.0-3.8.0], Patrol [3.16.0-3.17.0], Flutter 3.32.0
@@ -190,14 +262,6 @@ func TestTableCheckCompatibility(t *testing.T) {
 			patrolVersion:    "3.11.2",
 			areCompatible:    false,
 			context:          "❌ Flutter 3.22.0 with CLI 3.2.1, Patrol 3.11.2 not in table (only CLI 3.2.0, Patrol 3.11.0-3.11.1 allowed)",
-		},
-		{
-			name:             "nonCompatible_patrol_cli_and_patrol_versions_dont_match_any_entry", // ❌ Versions too high, not in table
-			flutterVersion:   "3.32.0",
-			patrolCLIVersion: "5.0.0",
-			patrolVersion:    "5.0.0",
-			areCompatible:    false,
-			context:          "❌ CLI 5.0.0 and Patrol 5.0.0 not in any table entry",
 		},
 		{
 			name:             "nonCompatible_patrol_cli_version_above_range_max", // ❌ CLI version above max for any entry

@@ -15,7 +15,7 @@ project_type_tags:
 type_tags:
   - test
   - build
-  - integrationf
+  - integration-test
 
 toolkit:
   go:
@@ -34,14 +34,14 @@ inputs:
       **Resources:**
       - [Compatibility Table](https://patrol.leancode.co/documentation/compatibility-table)
     is_required: false
-- test_target_directory:
+- test_target_directory: "integration_test"
   opts:
     title: Test Target Directory
-    summary: The directory that will be built by the step
+    summary: The directory containing the Patrol test entry point.
     description: |-
-      The directory that will be built by the step.
-      If you leave this input empty, the step will use the entrypoint test_bundle.dart 
-      from integration_test or patrol_test folder, depending on your Patrol Version.
+      The directory containing your Patrol test entry point file.
+      Defaults to `integration_test`, which is the standard folder for Flutter integration tests.
+      Change this to `patrol_test` if you are using an older Patrol version.
     is_required: false
 - platform: both
   opts:
