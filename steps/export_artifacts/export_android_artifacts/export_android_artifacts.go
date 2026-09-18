@@ -5,10 +5,10 @@ import (
 	"os"
 	"path/filepath"
 
-	regex "patrol_install/constants"
-	build_constants "patrol_install/steps/build/constants"
-	export_artifacts_utils "patrol_install/steps/export_artifacts/utils"
-	print "patrol_install/utils/print"
+	regex "patrol_build_flutter/constants"
+	build_constants "patrol_build_flutter/steps/build/constants"
+	export_artifacts_utils "patrol_build_flutter/steps/export_artifacts/utils"
+	print "patrol_build_flutter/utils/print"
 )
 
 // CopyAndroidArtifactsFromEnv derives paths from env and exports Android artifacts.

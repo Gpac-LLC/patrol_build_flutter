@@ -53,3 +53,11 @@ go.work.sum
 .bitrise*
 README.md.backup
 _tmp/
+
+# AI Related folders
+.claude/
+.codex/
+.kiro/
+.cursor/
+.windsurf/
+.gemini/

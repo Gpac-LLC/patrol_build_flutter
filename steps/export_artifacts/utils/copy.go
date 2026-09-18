@@ -5,7 +5,7 @@ import (
 	"io"
 	"os"
 	"path/filepath"
-	print "patrol_install/utils/print"
+	print "patrol_build_flutter/utils/print"
 )
 
 // closeWithLog closes a file and logs an error if closing fails.

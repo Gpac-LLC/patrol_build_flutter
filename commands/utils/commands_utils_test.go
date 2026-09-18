@@ -1,7 +1,7 @@
 package utils
 
 import (
-	"patrol_install/commands"
+	"patrol_build_flutter/commands"
 	"testing"
 )
 

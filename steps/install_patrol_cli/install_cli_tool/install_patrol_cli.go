@@ -3,10 +3,10 @@ package install_cli_tool
 import (
 	"os"
 
-	"patrol_install/commands"
-	constants "patrol_install/steps/build/constants"
-	"patrol_install/utils/exec"
-	print "patrol_install/utils/print"
+	"patrol_build_flutter/commands"
+	constants "patrol_build_flutter/steps/build/constants"
+	"patrol_build_flutter/utils/exec"
+	print "patrol_build_flutter/utils/print"
 )
 
 var patrolInstall = commands.PatrolInstall

@@ -8,7 +8,7 @@ import (
 	"strings"
 	"testing"
 
-	"patrol_install/utils/print"
+	"patrol_build_flutter/utils/print"
 )
 
 func captureOutput(f func(), t *testing.T) string {

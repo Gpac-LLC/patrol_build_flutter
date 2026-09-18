@@ -3,8 +3,8 @@ package builder
 import (
 	"fmt"
 
-	createparams "patrol_install/steps/build/steps/create_parameters"
-	"patrol_install/utils/print"
+	createparams "patrol_build_flutter/steps/build/steps/create_parameters"
+	"patrol_build_flutter/utils/print"
 )
 
 type BuilderRunner struct{}

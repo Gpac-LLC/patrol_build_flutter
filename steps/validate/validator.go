@@ -5,8 +5,8 @@ import (
 
 	v "github.com/Masterminds/semver/v3"
 
-	versions "patrol_install/steps/validate/validate_versions"
-	"patrol_install/utils/print"
+	versions "patrol_build_flutter/steps/validate/validate_versions"
+	"patrol_build_flutter/utils/print"
 )
 
 type Validator interface {

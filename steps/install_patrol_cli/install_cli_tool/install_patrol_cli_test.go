@@ -5,7 +5,7 @@ import (
 	"os"
 	"testing"
 
-	"patrol_install/commands"
+	"patrol_build_flutter/commands"
 )
 
 func resetPatrolCLIVersionEnv(t *testing.T) {

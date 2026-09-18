@@ -5,7 +5,7 @@ import (
 
 	v "github.com/Masterminds/semver/v3"
 
-	"patrol_install/utils/print"
+	"patrol_build_flutter/utils/print"
 )
 
 type Installer interface {

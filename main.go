@@ -3,11 +3,11 @@ package main
 import (
 	"os"
 
-	build "patrol_install/steps/build"
-	"patrol_install/steps/export_artifacts"
-	"patrol_install/steps/install_patrol_cli"
-	"patrol_install/steps/validate"
-	"patrol_install/utils/print"
+	build "patrol_build_flutter/steps/build"
+	"patrol_build_flutter/steps/export_artifacts"
+	"patrol_build_flutter/steps/install_patrol_cli"
+	"patrol_build_flutter/steps/validate"
+	"patrol_build_flutter/utils/print"
 )
 
 func exitOnError(step string, err error) {

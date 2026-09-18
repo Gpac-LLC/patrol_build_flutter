@@ -6,7 +6,7 @@ import (
 	"io"
 	"os/exec"
 
-	"patrol_install/utils/print"
+	"patrol_build_flutter/utils/print"
 )
 
 type Builder interface {

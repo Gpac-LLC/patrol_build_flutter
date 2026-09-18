@@ -7,9 +7,9 @@ import (
 
 	v "github.com/Masterminds/semver/v3"
 
-	"patrol_install/commands"
-	commands_utils "patrol_install/commands/utils"
-	"patrol_install/utils/exec"
+	"patrol_build_flutter/commands"
+	commands_utils "patrol_build_flutter/commands/utils"
+	"patrol_build_flutter/utils/exec"
 )
 
 var FlutterPubDepsCmd = commands.FlutterPubDependencies

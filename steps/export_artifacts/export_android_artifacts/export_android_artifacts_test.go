@@ -6,8 +6,8 @@ import (
 	"strings"
 	"testing"
 
-	build_constants "patrol_install/steps/build/constants"
-	export_artifacts_utils "patrol_install/steps/export_artifacts/utils"
+	build_constants "patrol_build_flutter/steps/build/constants"
+	export_artifacts_utils "patrol_build_flutter/steps/export_artifacts/utils"
 )
 
 type stubEnvExporter struct {
