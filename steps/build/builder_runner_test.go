@@ -4,16 +4,12 @@ import (
 	"os"
 	"testing"
 
-	build_constants "patrol_build_flutter/steps/build/constants"
+	buildconstants "patrol_build_flutter/steps/build/constants"
 )
 
 func TestBuilderRunner_BuildParametersFromEnv_Success(t *testing.T) {
-	os.Setenv(build_constants.Platform, "android")
-	os.Setenv(build_constants.BuildType, "release")
-	defer func() {
-		os.Unsetenv(build_constants.Platform)
-		os.Unsetenv(build_constants.BuildType)
-	}()
+	t.Setenv(buildconstants.Platform, "android")
+	t.Setenv(buildconstants.BuildType, "release")
 
 	runner := &BuilderRunner{}
 	cmds, err := runner.BuildParametersFromEnv()
@@ -29,9 +25,11 @@ func TestBuilderRunner_BuildParametersFromEnv_Success(t *testing.T) {
 }
 
 func TestBuilderRunner_BuildParametersFromEnv_MissingPlatform(t *testing.T) {
-	os.Unsetenv(build_constants.Platform)
-	os.Setenv(build_constants.BuildType, "release")
-	defer os.Unsetenv(build_constants.BuildType)
+	t.Setenv(buildconstants.Platform, "")
+	if err := os.Unsetenv(buildconstants.Platform); err != nil {
+		t.Fatalf("unset platform: %v", err)
+	}
+	t.Setenv(buildconstants.BuildType, "release")
 
 	runner := &BuilderRunner{}
 	cmds, err := runner.BuildParametersFromEnv()
