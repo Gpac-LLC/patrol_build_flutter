@@ -3,8 +3,8 @@ package validate
 import (
 	v "github.com/Masterminds/semver/v3"
 
-	flutter "patrol_install/steps/validate/get_flutter_version"
-	patrol "patrol_install/steps/validate/get_patrol_version"
+	flutter "patrol_build_flutter/steps/validate/get_flutter_version"
+	patrol "patrol_build_flutter/steps/validate/get_patrol_version"
 )
 
 type ValidatorRunner struct{}

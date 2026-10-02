@@ -3,10 +3,10 @@ package export_artifacts
 import (
 	"os"
 
-	build_constants "patrol_install/steps/build/constants"
-	export_android_artifacts "patrol_install/steps/export_artifacts/export_android_artifacts"
-	export_ios_artifacts "patrol_install/steps/export_artifacts/export_ios_artifacts"
-	print "patrol_install/utils/print"
+	build_constants "patrol_build_flutter/steps/build/constants"
+	export_android_artifacts "patrol_build_flutter/steps/export_artifacts/export_android_artifacts"
+	export_ios_artifacts "patrol_build_flutter/steps/export_artifacts/export_ios_artifacts"
+	print "patrol_build_flutter/utils/print"
 )
 
 var exportAndroid = func() error {

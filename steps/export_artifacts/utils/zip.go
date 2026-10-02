@@ -3,8 +3,8 @@ package export_artifacts_utils
 import (
 	"fmt"
 
-	"patrol_install/commands"
-	"patrol_install/utils/exec"
+	"patrol_build_flutter/commands"
+	"patrol_build_flutter/utils/exec"
 )
 
 var compressIOSFiles = commands.CompressIOSFiles

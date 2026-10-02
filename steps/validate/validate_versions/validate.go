@@ -36,6 +36,9 @@ func CheckCompatibility(params ValidateRunParams) bool {
 }
 
 func isVersionInRange(v *v.Version, r VersionRange) bool {
-	return (v.Equal(r.Min) || v.GreaterThan(r.Min)) &&
-		(v.Equal(r.Max) || v.LessThan(r.Max))
+	if v.LessThan(r.Min) {
+		return false
+	}
+
+	return r.Max == nil || !v.GreaterThan(r.Max)
 }

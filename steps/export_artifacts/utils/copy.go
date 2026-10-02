@@ -5,13 +5,13 @@ import (
 	"io"
 	"os"
 	"path/filepath"
-	print "patrol_install/utils/print"
+	print "patrol_build_flutter/utils/print"
 )
 
 // closeWithLog closes a file and logs an error if closing fails.
 func closeWithLog(f io.Closer, name string) {
 	if err := f.Close(); err != nil {
-		print.Error(fmt.Sprintf("Error closing %s: %v", name, err))
+		print.Errorf("Error closing %s: %v", name, err)
 	}
 }
 
@@ -25,29 +25,29 @@ func CopyFilesToFolder(srcFiles []string, destFolder string, envKeys []string) e
 		dst := filepath.Join(destFolder, filepath.Base(srcFile))
 		info, err := os.Lstat(srcFile)
 		if err != nil {
-			print.Error(fmt.Sprintf("Error opening %s: %v", srcFile, err))
+			print.Errorf("Error opening %s: %v", srcFile, err)
 			return err
 		}
 
 		if info.IsDir() {
 			if err := copyDir(srcFile, dst); err != nil {
-				print.Error(fmt.Sprintf("Error copying directory %s to %s: %v", srcFile, dst, err))
+				print.Errorf("Error copying directory %s to %s: %v", srcFile, dst, err)
 				return err
 			}
 		} else {
 			if err := copyFile(srcFile, dst, info.Mode()); err != nil {
-				print.Error(fmt.Sprintf("Error copying %s to %s: %v", srcFile, dst, err))
+				print.Errorf("Error copying %s to %s: %v", srcFile, dst, err)
 				return err
 			}
 		}
 
-		print.Success(fmt.Sprintf("Copied to %s", dst))
+		print.Successf("Copied to %s", dst)
 
 		if err := exportEnv(envKeys[i], dst); err != nil {
-			print.Error(fmt.Sprintf("Error exporting env by Envman %s: %v", envKeys[i], err))
+			print.Errorf("Error exporting env by Envman %s: %v", envKeys[i], err)
 			return err
 		}
-		print.Success(fmt.Sprintf("Artifact: %s exported into: %s \n", dst, envKeys[i]))
+		print.Successf("Artifact: %s exported into: %s \n", dst, envKeys[i])
 
 	}
 	return nil

@@ -7,9 +7,9 @@ import (
 	"path/filepath"
 	"sort"
 
-	build_constants "patrol_install/steps/build/constants"
-	export_artifacts_utils "patrol_install/steps/export_artifacts/utils"
-	print "patrol_install/utils/print"
+	build_constants "patrol_build_flutter/steps/build/constants"
+	export_artifacts_utils "patrol_build_flutter/steps/export_artifacts/utils"
+	print "patrol_build_flutter/utils/print"
 )
 
 var errInvalidBuildFlags = errors.New("invalid iOS build flags")

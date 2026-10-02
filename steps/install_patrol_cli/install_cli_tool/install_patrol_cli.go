@@ -3,10 +3,10 @@ package install_cli_tool
 import (
 	"os"
 
-	"patrol_install/commands"
-	constants "patrol_install/steps/build/constants"
-	"patrol_install/utils/exec"
-	print "patrol_install/utils/print"
+	"patrol_build_flutter/commands"
+	constants "patrol_build_flutter/steps/build/constants"
+	"patrol_build_flutter/utils/exec"
+	print "patrol_build_flutter/utils/print"
 )
 
 var patrolInstall = commands.PatrolInstall
@@ -21,7 +21,7 @@ func InstallPatrolCLI(executor CommandExecutor) (string, error) {
 	if customVersion == "" {
 		print.Warning("Version was not provided. Using the latest version.")
 	} else {
-		print.Action("Installing custom version provided: " + customVersion)
+		print.Actionf("Installing custom version provided: %s", customVersion)
 	}
 
 	installCmd := buildInstallCommand(customVersion)

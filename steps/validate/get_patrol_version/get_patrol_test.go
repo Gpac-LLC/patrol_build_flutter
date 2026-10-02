@@ -3,7 +3,7 @@ package get_patrol_version
 import (
 	"testing"
 
-	"patrol_install/commands"
+	"patrol_build_flutter/commands"
 
 	v "github.com/Masterminds/semver/v3"
 )

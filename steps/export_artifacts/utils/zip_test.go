@@ -3,7 +3,7 @@ package export_artifacts_utils
 import (
 	"testing"
 
-	"patrol_install/commands"
+	"patrol_build_flutter/commands"
 )
 
 type commandExecutorStub struct {

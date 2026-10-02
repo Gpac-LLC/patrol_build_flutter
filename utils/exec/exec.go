@@ -5,7 +5,7 @@ import (
 	"fmt"
 	"os/exec"
 
-	"patrol_install/commands"
+	"patrol_build_flutter/commands"
 )
 
 // / Executes a command and returns its output as a string.

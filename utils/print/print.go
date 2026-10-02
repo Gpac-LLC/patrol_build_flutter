@@ -31,34 +31,70 @@ func init() {
 	SetColorsForOS(runtime.GOOS)
 }
 
-func _printColor(colorCode string, message string) {
+func printColor(colorCode string, message string) {
 	fmt.Println(colorCode + message + Reset)
 }
 
 func Error(message string) {
-	_printColor(Red, message)
+	printColor(Red, message)
+}
+
+func Errorf(format string, a ...any) {
+	printColor(Red, fmt.Sprintf(format, a...))
 }
 
 func Success(message string) {
-	_printColor(Green, message)
+	printColor(Green, message)
+}
+
+func Successf(format string, a ...any) {
+	printColor(Green, fmt.Sprintf(format, a...))
 }
 
 func Warning(message string) {
-	_printColor(Yellow, message)
+	printColor(Yellow, message)
+}
+
+func Warningf(format string, a ...any) {
+	printColor(Yellow, fmt.Sprintf(format, a...))
+}
+
+func Info(message string) {
+	printColor(Cyan, message)
+}
+
+func Infof(format string, a ...any) {
+	printColor(Cyan, fmt.Sprintf(format, a...))
 }
 
 func Action(message string) {
-	_printColor(Blue, message)
+	printColor(Blue, message)
+}
+
+func Actionf(format string, a ...any) {
+	printColor(Blue, fmt.Sprintf(format, a...))
 }
 
 func StepCompleted(message string) {
-	_printColor(Purple, message)
+	printColor(Purple, message)
+}
+
+func StepCompletedf(format string, a ...any) {
+	printColor(Purple, fmt.Sprintf(format, a...))
 }
 
 func StepInitiated(message string) {
-	_printColor(Cyan, message)
+	printColor(Cyan, message)
+}
+
+func StepInitiatedf(format string, a ...any) {
+	printColor(Cyan, fmt.Sprintf(format, a...))
 }
 
 func Vanilla(message string) {
 	fmt.Println(message)
+}
+
+func Vanillaf(format string, a ...any) {
+	fmt.Println(fmt.Sprintf(format, a...))
 }

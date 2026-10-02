@@ -3,23 +3,24 @@ package builder
 import (
 	"fmt"
 
-	getEnv "patrol_install/steps/build/steps/create_parameters"
-	"patrol_install/utils/print"
+	createparams "patrol_build_flutter/steps/build/steps/create_parameters"
+	"patrol_build_flutter/utils/print"
 )
 
 type BuilderRunner struct{}
 
 func (p *BuilderRunner) BuildParametersFromEnv() ([]string, error) {
-	command, err := getEnv.BuildParametersFromEnv()
+	command, err := createparams.BuildParametersFromEnv()
 	if err != nil {
-		print.Error(fmt.Sprintf("Build failed: %s", err))
-		return []string{}, err
+		print.Errorf("Build failed: %s", err)
+		return nil, err
 	}
 
 	finalCommand := command.Command()
-	if finalCommand == nil {
-		print.Error(fmt.Sprintf("Build failed: %s", err))
-		return []string{}, err
+	if len(finalCommand) == 0 {
+		buildErr := fmt.Errorf("no build commands generated: Command() returned empty")
+		print.Error(buildErr.Error())
+		return nil, buildErr
 	}
 
 	return finalCommand, nil

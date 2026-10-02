@@ -1,4 +1,4 @@
-module patrol_install
+module patrol_build_flutter
 
 go 1.24.2
 

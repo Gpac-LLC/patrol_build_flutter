@@ -1,6 +1,6 @@
 package export_artifacts
 
-import "patrol_install/utils/print"
+import "patrol_build_flutter/utils/print"
 
 type Exporter interface {
 	FindAndExport() error

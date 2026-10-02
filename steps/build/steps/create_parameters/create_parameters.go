@@ -3,8 +3,8 @@ package create_parameters
 import (
 	"os"
 
-	constants "patrol_install/steps/build/constants"
-	bp "patrol_install/steps/build/models/build_parameters"
+	constants "patrol_build_flutter/steps/build/constants"
+	bp "patrol_build_flutter/steps/build/models/build_parameters"
 )
 
 func BuildParametersFromEnv() (*bp.BuildParameters, error) {

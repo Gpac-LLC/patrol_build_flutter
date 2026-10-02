@@ -10,6 +10,7 @@ The compatibility table is used to check if the Patrol CLI version is compatible
 */
 type VersionRange struct {
 	Min *v.Version
+	// Max is nil when every version greater than or equal to Min is supported.
 	Max *v.Version
 }
 
@@ -26,8 +27,38 @@ type CompatibilityEntry struct {
 
 var CompatibilityTable = []CompatibilityEntry{
 	{
+		PatrolCLIRange: VersionRange{Min: v.MustParse("4.7.0")},
+		PatrolRange:    VersionRange{Min: v.MustParse("4.9.0")},
+		FlutterVersion: v.MustParse("3.32.0"),
+	},
+	{
+		PatrolCLIRange: VersionRange{Min: v.MustParse("4.5.0"), Max: v.MustParse("4.6.1")},
+		PatrolRange:    VersionRange{Min: v.MustParse("4.7.0"), Max: v.MustParse("4.8.0")},
+		FlutterVersion: v.MustParse("3.32.0"),
+	},
+	{
+		PatrolCLIRange: VersionRange{Min: v.MustParse("4.4.0"), Max: v.MustParse("4.4.0")},
+		PatrolRange:    VersionRange{Min: v.MustParse("4.6.0"), Max: v.MustParse("4.6.1")},
+		FlutterVersion: v.MustParse("3.32.0"),
+	},
+	{
+		PatrolCLIRange: VersionRange{Min: v.MustParse("4.3.0"), Max: v.MustParse("4.3.1")},
+		PatrolRange:    VersionRange{Min: v.MustParse("4.5.0"), Max: v.MustParse("4.5.0")},
+		FlutterVersion: v.MustParse("3.32.0"),
+	},
+	{
+		PatrolCLIRange: VersionRange{Min: v.MustParse("4.2.0"), Max: v.MustParse("4.2.0")},
+		PatrolRange:    VersionRange{Min: v.MustParse("4.2.0"), Max: v.MustParse("4.4.0")},
+		FlutterVersion: v.MustParse("3.32.0"),
+	},
+	{
+		PatrolCLIRange: VersionRange{Min: v.MustParse("4.0.2"), Max: v.MustParse("4.1.0")},
+		PatrolRange:    VersionRange{Min: v.MustParse("4.1.0"), Max: v.MustParse("4.1.1")},
+		FlutterVersion: v.MustParse("3.32.0"),
+	},
+	{
 		PatrolCLIRange: VersionRange{Min: v.MustParse("4.0.0"), Max: v.MustParse("4.0.1")},
-		PatrolRange:    VersionRange{Min: v.MustParse("4.0.0"), Max: v.MustParse("4.0.0")},
+		PatrolRange:    VersionRange{Min: v.MustParse("4.0.0"), Max: v.MustParse("4.0.1")},
 		FlutterVersion: v.MustParse("3.32.0"),
 	},
 	{

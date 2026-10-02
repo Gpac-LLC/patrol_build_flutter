@@ -4,7 +4,7 @@ import (
 	"errors"
 	"testing"
 
-	build_constants "patrol_install/steps/build/constants"
+	build_constants "patrol_build_flutter/steps/build/constants"
 )
 
 type exportCallState struct {

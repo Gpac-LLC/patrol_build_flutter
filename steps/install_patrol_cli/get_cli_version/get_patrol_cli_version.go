@@ -6,9 +6,9 @@ import (
 
 	v "github.com/Masterminds/semver/v3"
 
-	"patrol_install/commands"
-	regex "patrol_install/constants"
-	"patrol_install/utils/exec"
+	"patrol_build_flutter/commands"
+	regex "patrol_build_flutter/constants"
+	"patrol_build_flutter/utils/exec"
 )
 
 var patrolDoctor = commands.PatrolDoctor
